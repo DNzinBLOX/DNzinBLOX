@@ -1,45 +1,47 @@
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))() 
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))() 
 
-local Window = Library.CreateLib("tutorial", "DarkTheme") 
+local Window = OrionLib:MakeWindow({Name = "DN hub", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"}) 
 
-local Tab = Window:NewTab("TabName") 
+--[[
+Name = <string> - The name of the UI.
+HidePremium = <bool> - Whether or not the user details shows Premium status or not.
+SaveConfig = <bool> - Toggles the config saving in the UI.
+ConfigFolder = <string> - The name of the folder where the configs are saved.
+IntroEnabled = <bool> - Whether or not to show the intro animation.
+IntroText = <string> - Text to show in the intro animation.
+IntroIcon = <string> - URL to the image you want to use in the intro animation.
+Icon = <string> - URL to the image you want displayed on the window.
+CloseCallback = <function> - Function to execute when the window is closed.
+]] 
 
-local Section = Tab:NewSection("Section Name") 
+local Tab = Window:MakeTab({
+Name = "Tab 1",
+Icon = "rbxassetid://4483345998",
+PremiumOnly = false
+}) 
 
-Section:UpdateSection("Section New Title") 
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]] 
 
-label:UpdateLabel("New Text") 
+local Section = Tab:AddSection({
+Name = "Section"
+}) 
 
-Section:NewButton("ButtonText", "ButtonInfo", function()
-    print("Clicked")
-end) 
+--[[
+Name = <string> - The name of the section.
+]] 
 
-Section:NewToggle("ToggleText", "ToggleInfo", function(state)
-    if state then
-        print("Toggle On")
-    else
-        print("Toggle Off")
-    end
-end) 
+Tab:AddButton({
+Name = "teste",
+Callback = function()
+      print("button pressed")
+  end    
+}) 
 
-local Window = Library.CreateLib("tutorial", colors) 
-
-for theme, color in pairs(themes) do
-    Section:NewColorPicker(theme, "Change your "..theme, color, function(color3)
-        Library:ChangeColor(theme, color3)
-    end)
-end
-
-
-local colors = {
-    SchemeColor = Color3.fromRGB(0,255,255),
-    Background = Color3.fromRGB(0, 0, 0),
-    Header = Color3.fromRGB(0, 0, 0),
-    TextColor = Color3.fromRGB(255,255,255),
-    ElementColor = Color3.fromRGB(20, 20, 20)
-} 
-
-Section:NewColorPicker("Color Text", "Color Info", Color3.fromRGB(0,0,0), function(color)
-    print(color)
-    -- Second argument is the default color
-end)
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
